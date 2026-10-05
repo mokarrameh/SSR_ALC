@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the article below."
+title: "SSR-ALC: Semi-supervised representation learning for anatomical landmark classification of endoscopy images"
+authors:
+  - family-names: Einlou
+    given-names: Mokarrameh
+  - family-names: Yaghoobian
+    given-names: Omid
+  - family-names: Wahid
+    given-names: Khan A.
+repository-code: "https://github.com/mokarrameh/SSR_ALC"
+license: MIT
+version: 1.0.0
+preferred-citation:
+  type: article
+  title: "SSR-ALC: Semi-supervised representation learning for anatomical landmark classification of endoscopy images"
+  authors:
+    - family-names: Einlou
+      given-names: Mokarrameh
+    - family-names: Yaghoobian
+      given-names: Omid
+    - family-names: Wahid
+      given-names: Khan A.
+  journal: "Biomedical Signal Processing and Control"
+  volume: 123
+  start: 110672
+  year: 2026
+  doi: "10.1016/j.bspc.2026.110672"

@@ -1,0 +1,43 @@
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Virtual environments
+.venv/
+venv/
+*_env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local datasets and training outputs (do not ship to GitHub)
+dataset/
+checkpoints/
+outputs/
+results_analysis/
+runs/
+wandb/
+
+# Model artifacts (extra safety if paths move)
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.npz
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*~
+*.swp
+*.swo
+*.tmp
+*.bak
+*.bkp
+.$*.drawio.bkp

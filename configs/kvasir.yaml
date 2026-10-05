@@ -1,0 +1,33 @@
+# Cross-dataset generalization on Kvasir v2 (Table 13).
+# Expected layout: <data_path>/<labeled_dir>/<class-name>/<file-name>
+global:
+  num_workers: 1
+  data_path: "dataset/kvasir"
+  labeled_dir: "labeled"
+  split_csv: "splits/kvasir_v2_10fold.csv"
+  l_batch_size: 32
+  device: "auto"
+  checkpoints_dir: "checkpoints"
+  name: "kvasir"
+
+train:
+  epochs: 100
+  ae_lr: 0.0001
+  cl_lr: 0.0001
+  weight_decay: 1e-5
+  patience: 20
+  num_folds: 10
+  folds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  aes: ["convAE", "deepConvAE", "deepConvAEV1"]
+  # Eq. (4). The code computes alpha * CE + gamma * labeled reconstruction (beta is unused);
+  # alpha is additionally raised on a schedule when the classifier LR drops. Values of the original script.
+  alpha: 1
+  beta: 10
+  gamma: 5
+  seed: 42
+  # Best-fold Experiment 4 weights on HyperKvasir (Table 9 "Best Fold"), as written by exp4_train.py.
+  # Train Experiment 4 first (configs/exp4_default.yaml).
+  pretrained_ae:
+    convAE: "checkpoints/EXP_4/0/simpleNN_convAE/fold_2/model_weights/AE_100_epochs_2fold.pth"
+    deepConvAE: "checkpoints/EXP_4/0/simpleNN_deepConvAE/fold_1/model_weights/AE_100_epochs_1fold.pth"
+    deepConvAEV1: "checkpoints/EXP_4/0/simpleNN_deepConvAEV1/fold_4/model_weights/AE_100_epochs_4fold.pth"

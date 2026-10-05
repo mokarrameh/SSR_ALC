@@ -1,0 +1,35 @@
+# Experiment 2 (Table 9, ID 2): semi-supervised AE with classifier feedback, no LATE-SMOTE.
+global:
+  num_workers: 1
+  data_path: "dataset"
+  labeled_dir: "labeled"
+  unlabeled_dir: "unlabeled"
+  u_train_subdir: "train"
+  u_test_subdir: "test"
+  u_val_subdir: "val"
+  split_csv: "splits/hyperkvasir_5fold_expanded.csv"
+  l_batch_size: 32
+  u_train_batch_size: 256
+  u_val_batch_size: 64
+  u_test_batch_size: 64
+  device: "auto"
+  checkpoints_dir: "checkpoints"
+  name: "EXP_2"
+
+train:
+  epochs: 100
+  ae_lr: 0.0001
+  cl_lr: 0.0001
+  weight_decay: 1e-5
+  patience: 20
+  num_folds: 5
+  folds: [0, 1, 2, 3, 4]
+  aes: ["convAE", "deepConvAE", "deepConvAEV1"]
+  alpha: 10
+  beta: 10
+  gamma: 1
+  # The expanded split already contains the 56 additional Ileum images (in all folds),
+  # so no extra train-only images are added.
+  extra_img_dir: null
+  extra_img_n: 0
+  extra_seed: 42

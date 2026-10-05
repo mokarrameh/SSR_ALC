@@ -1,0 +1,36 @@
+# Ileum sensitivity analysis (Sec. 5.9.1, Fig. 9).
+# Original split (9 Ileum images) + N extra Ileum images added to the TRAINING set only;
+# validation and test folds are unchanged. Run once per N, e.g.
+#   python exp4_train.py --config configs/ileum_sensitivity.yaml --extra_img_n 30
+# with N in {0, 10, 20, 30, 40, 50, 56}, then: python analysis/ileum_sensitivity_summary.py
+# alpha/beta/gamma = 1/5/5 as recorded in the train_opt.yaml of the runs behind Fig. 9.
+global:
+  num_workers: 1
+  data_path: "dataset"
+  labeled_dir: "labeled"
+  unlabeled_dir: "unlabeled"
+  u_train_subdir: "train"
+  u_test_subdir: "test"
+  u_val_subdir: "val"
+  split_csv: "splits/hyperkvasir_5fold_original.csv"
+  l_batch_size: 32
+  u_train_batch_size: 256
+  u_val_batch_size: 64
+  u_test_batch_size: 64
+  device: "auto"
+  checkpoints_dir: "checkpoints"
+  name: "ileum_sensitivity"
+
+train:
+  epochs: 100
+  ae_lr: 0.0001
+  cl_lr: 0.0001
+  weight_decay: 1e-5
+  patience: 20
+  folds: [0, 1, 2, 3, 4]
+  aes: ["deepConvAE"]
+  alpha: 1
+  beta: 5
+  gamma: 5
+  extra_img_dir: "extra_ileum"
+  extra_seed: 42

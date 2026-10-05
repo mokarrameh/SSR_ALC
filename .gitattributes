@@ -1,0 +1,11 @@
+# Normalize line endings in the repository (LF), check out natively.
+* text=auto
+*.sh text eol=lf
+*.py text
+*.yaml text
+*.csv text
+*.md text
+*.ipynb text
+*.png binary
+*.jpg binary
+*.pth binary

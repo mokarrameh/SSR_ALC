@@ -1,0 +1,24 @@
+# Unsupervised AE pretraining used by Experiments 1 and 3 (Table 9, rows 1 and 3).
+global:
+  num_workers: 1
+  data_path: "dataset"
+  labeled_dir: "labeled"
+  unlabeled_dir: "unlabeled"
+  u_train_subdir: "train"
+  u_val_subdir: "val"
+  u_test_subdir: "test"
+  split_csv: "splits/hyperkvasir_5fold_expanded.csv"  # not used by this script
+  u_train_batch_size: 256
+  u_val_batch_size: 64    # the original ONLY_AE run used 256 for training and 64 for val/test
+  u_test_batch_size: 64
+  device: "auto"
+  checkpoints_dir: "checkpoints"
+  name: "ONLY_AE"
+
+train:
+  epochs: 100
+  ae_lr: 0.001        # the original ONLY_AE script used 1e-3 (the joint models use 1e-4)
+  weight_decay: 1e-5
+  patience: 20
+  aes: ["convAE", "deepConvAE", "deepConvAEV1"]
+  seed: 42

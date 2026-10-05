@@ -1,0 +1,40 @@
+# Hyperparameter grid search (Sec. 4.8, Table 6): (alpha, beta, gamma) in {1, 2, 5, 10}^3
+# on fold 5 (index 4), selected by validation macro-F1. Settings as recorded in the
+# train_opt.yaml of the grid run: original split + 56 GastroLab Ileum images added to
+# the training set only, 1024-d model, 50 epochs.
+global:
+  num_workers: 1
+  data_path: "dataset"
+  labeled_dir: "labeled"
+  unlabeled_dir: "unlabeled"
+  u_train_subdir: "train"
+  u_test_subdir: "test"
+  u_val_subdir: "val"
+  split_csv: "splits/hyperkvasir_5fold_original.csv"
+  l_batch_size: 32
+  u_train_batch_size: 256
+  u_val_batch_size: 64
+  u_test_batch_size: 64
+  device: "auto"
+  checkpoints_dir: "checkpoints"
+  name: "hpo"
+
+train:
+  enabled: true
+  epochs: 50
+  ae_lr: 0.0001
+  cl_lr: 0.0001
+  weight_decay: 1e-5
+  patience: 20
+  trials: 30
+  metric: "val_f1"
+  folds: [4]
+  aes: ["deepConvAE"]
+  seed: 42
+  extra_img_dir: "extra_ileum"
+  extra_img_n: 56
+  extra_seed: 42
+  search_space:
+    alpha: [1, 2, 5, 10]
+    beta: [1, 2, 5, 10]
+    gamma: [1, 2, 5, 10]
